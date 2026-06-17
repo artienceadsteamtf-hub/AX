@@ -24,7 +24,8 @@ body{font-family:'Pretendard','Apple SD Gothic Neo','Malgun Gothic',sans-serif;b
 .qmeta{font-size:10.5px;font-weight:700;border-radius:5px;padding:2px 7px;border:1px solid #e2e8f0;color:#64748b;background:#f8fafc}
 .qtext{font-size:15px;font-weight:700;color:#0f172a;line-height:1.5}
 .opts{display:flex;flex-direction:column;gap:8px;margin-top:10px}
-.opt{display:flex;align-items:center;gap:10px;padding:11px 14px;border:1.5px solid #e7ebf1;border-radius:10px;font-size:13.5px;color:#334155;cursor:pointer}
+.opt{display:flex;align-items:center;gap:11px;padding:13px 15px;min-height:46px;border:1.5px solid #e7ebf1;border-radius:10px;font-size:14.5px;line-height:1.45;color:#334155;cursor:pointer}
+@media(max-width:600px){.opt{font-size:15px;padding:14px 15px;min-height:50px}.qtext{font-size:15.5px}.wrap{padding:18px 13px 90px}}
 .opt:hover{background:#f5f8ff;border-color:#c7d7f5}
 .opt.sel{background:#eff6ff;border-color:#3b82f6;color:#1e3a8a;font-weight:700}
 .opt .dot{width:18px;height:18px;border-radius:50%;border:2px solid #cbd5e1;flex-shrink:0}
@@ -134,7 +135,7 @@ function finalize(){
  const result={v:2,name:window._name,takenAt:new Date().toISOString(),score:final,correct,total,unsure,reachedTier:reached,
    tierPct:{1:tierStat[1]?tierStat[1].pct:null,2:tierStat[2]?tierStat[2].pct:null,3:tierStat[3]?tierStat[3].pct:null},
    pass:{1:!!(tierStat[1]&&tierStat[1].pass),2:!!(tierStat[2]&&tierStat[2].pass),3:!!(tierStat[3]&&tierStat[3].pass)},
-   byArea:byAreaPct, byLevel, weak};
+   byArea:byAreaPct, byLevel, weak, mode:(PT.mode||'pre')};
  renderResult(result);
 }
 function b64(o){return btoa(unescape(encodeURIComponent(JSON.stringify(o))));}
@@ -159,5 +160,6 @@ function renderResult(r){
  trySubmit(code);
  $('copyBtn').addEventListener('click',()=>{const ta=$('codeOut');ta.select();try{document.execCommand('copy');}catch(e){}if(navigator.clipboard)navigator.clipboard.writeText(ta.value).catch(()=>{});$('copyStat').textContent='✅ 복사됨';});
 }
+if((PT.mode||'pre')==='post'){document.title='AD본부 AI 사후 평가 테스트 (단계형)';var _h=document.querySelector('.head h1');if(_h)_h.textContent='AD본부 AI 사후 평가 테스트';var _p=document.querySelector('.head p');if(_p)_p.insertAdjacentHTML('afterbegin','<b style="color:#16a34a">[교육 후 사후 평가] </b>');}
 started=true; renderTier(1);
 </script></body></html>
